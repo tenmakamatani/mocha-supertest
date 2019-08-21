@@ -23,11 +23,10 @@ describe("POST /", () => {
             .post("/")
             .send({ name: "hoge" })
             .set("Accept", "application/json")
-            .expect("Content-Type", /json/)
-            .expect(200)
-            .then((res) => {
-                assert.equal(res.body.name, "Mr.hoge");
-            });
+            .expect((res) => {
+                res.body.name = "Mr.hoge";
+            })
+            .expect(200, done);
     });
 
 });
