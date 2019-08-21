@@ -18,13 +18,24 @@ describe("GET /", () => {
 
 describe("POST /", () => {
 
-    it("Whether the string 'Mr.hoge' will return", (done) => {
+    it("Whether the string 'Mr.hoge' will return using json", (done) => {
         request(app)
             .post("/")
             .send({ name: "hoge" })
             .set("Accept", "application/json")
             .expect((res) => {
                 res.body.name = "Mr.hoge";
+            })
+            .expect(200, done);
+    });
+
+    it("Whether the string 'Mr.hoge' will return using urlencoded", (done) => {
+        request(app)
+            .post("/")
+            .send("name=hoge")
+            .set("Accept", "application/json")
+            .expect((res) => {
+                res.body.name = "Mr.hoge"
             })
             .expect(200, done);
     });
