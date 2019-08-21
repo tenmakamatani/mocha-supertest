@@ -5,4 +5,13 @@ const request = require("supertest");
 
 const app = require("../index");
 
-console.log(app);
+describe("GET /", () => {
+
+    it("Whether the string 'ok' will return", (done) => {
+        request(app)
+            .get("/")
+            .expect(/ok/)
+            .expect(200, done);
+    });
+
+});
